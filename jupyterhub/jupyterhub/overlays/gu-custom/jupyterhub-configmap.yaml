@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jupyterhub-cfg
+data:
+  jupyterhub_config.py: |
+    # Installera CAS-modulen
+
+    import sys, subprocess
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'jhub_cas_authenticator'])
+
+    # Konfigurera CAS
+
+    CAS_BASE_URL = 'https://idp3.it.gu.se/idp/profile/cas'
+    c.CASAuthenticator.cas_login_url = '%s/login' % CAS_BASE_URL
+    c.CASAuthenticator.cas_logout_url = '%s/logout' % CAS_BASE_URL
+    c.CASAuthenticator.cas_service_validate_url = '%s/serviceValidate' % CAS_BASE_URL
+    c.CASAuthenticator.cas_service_url = 'https://%s/login' % host
+    c.JupyterHub.authenticator_class = 'jhub_cas_authenticator.cas_auth.CASAuthenticator'
+
+  jupyterhub_admins: ""
+  gpu_mode: ""
+  singleuser_pvc_size: 2Gi
