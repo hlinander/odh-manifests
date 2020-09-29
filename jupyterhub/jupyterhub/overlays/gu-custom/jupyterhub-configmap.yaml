@@ -18,6 +18,13 @@ data:
     c.CASAuthenticator.cas_service_url = 'https://%s/login' % host
     c.JupyterHub.authenticator_class = 'jhub_cas_authenticator.cas_auth.CASAuthenticator'
 
+    # Tillåt inga oregistrerade användare att logga in. Kräver att
+    # minst en administratör har angivits i fältet jupyterhub_admins i
+    # ConfigMap:en jupyterhub-cfg. En tom lista innebär att vem som
+    # helst får logga in.
+    if admin_users:
+      c.Authenticator.whitelist = set(admin_users.split(','))
+
   jupyterhub_admins: ""
   gpu_mode: ""
   singleuser_pvc_size: 2Gi
