@@ -35,6 +35,10 @@ data:
 
     c.KubeSpawner.image_spec = 's2i-minimal-notebook:v0.0.4'
 
+    # Öppna Jupyter Lab isf filträdet
+
+    c.KubeSpawner.default_url = '/lab'
+
   jupyterhub_admins: ""
   gpu_mode: ""
   singleuser_pvc_size: 2Gi
