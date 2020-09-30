@@ -39,19 +39,25 @@ data:
 
     c.KubeSpawner.default_url = '/lab'
 
-    # Montera delad volym
+    # Montera delad volym skrivskyddad för vanliga användare, och
+    # skrivbar för administratörer
 
-    c.KubeSpawner.volumes.append({
-      'name': 'shared',
-      'persistentVolumeClaim': {
-        'claimName': '%s-shared' % os.environ['JUPYTERHUB_SERVICE_NAME'],
-        'readOnly': True
-      }
-    })
-    c.KubeSpawner.volume_mounts.append({
-      'name': 'shared',
-      'mountPath': '/opt/app-root/src/shared'
-    })
+    def _gu_custom_pre_spawn_hook(spawner):
+      setup_environment(spawner)
+      readOnly = not spawner.user.admin
+      spawner.volumes.append({
+        'name': 'shared',
+        'persistentVolumeClaim': {
+          'claimName': '%s-shared' % os.environ['JUPYTERHUB_SERVICE_NAME'],
+          'readOnly': readOnly
+        }
+      })
+      spawner.volume_mounts.append({
+        'name': 'shared',
+        'mountPath': '/opt/app-root/src/shared'
+      })
+
+    c.OpenShiftSpawner.pre_spawn_hook = _gu_custom_pre_spawn_hook
 
   jupyterhub_admins: ""
   gpu_mode: ""
