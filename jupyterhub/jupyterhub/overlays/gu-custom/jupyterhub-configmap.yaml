@@ -39,6 +39,20 @@ data:
 
     c.KubeSpawner.default_url = '/lab'
 
+    # Montera delad volym
+
+    c.KubeSpawner.volumes.append({
+      'name': 'shared',
+      'persistentVolumeClaim': {
+        'claimName': '%s-shared' % os.environ['JUPYTERHUB_SERVICE_NAME'],
+        'readOnly': True
+      }
+    })
+    c.KubeSpawner.volume_mounts.append({
+      'name': 'shared',
+      'mountPath': '/opt/app-root/src/shared'
+    })
+
   jupyterhub_admins: ""
   gpu_mode: ""
   singleuser_pvc_size: 2Gi
