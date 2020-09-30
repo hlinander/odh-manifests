@@ -26,6 +26,11 @@ data:
     if admin_users:
       c.Authenticator.whitelist = set(admin_users.split(','))
 
+    # Ta bort formuläret som visas när en notebook skapas
+
+    delattr(OpenShiftSpawner, '_options_form_default')
+    delattr(KubeSpawner, '_options_form_default')
+
   jupyterhub_admins: ""
   gpu_mode: ""
   singleuser_pvc_size: 2Gi
