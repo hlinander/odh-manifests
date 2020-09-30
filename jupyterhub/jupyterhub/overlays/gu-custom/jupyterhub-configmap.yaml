@@ -22,6 +22,7 @@ data:
     # minst en administratör har angivits i fältet jupyterhub_admins i
     # ConfigMap:en jupyterhub-cfg. En tom lista innebär att vem som
     # helst får logga in.
+
     if admin_users:
       c.Authenticator.whitelist = set(admin_users.split(','))
 
