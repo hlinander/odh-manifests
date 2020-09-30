@@ -59,6 +59,12 @@ data:
 
     c.OpenShiftSpawner.pre_spawn_hook = _gu_custom_pre_spawn_hook
 
+    # Installera Python-moduler på persistent lagring
+
+    USER_SITE = '/opt/app-root/src/.local/lib/python3.6/site-packages'
+    c.OpenShiftSpawner.environment.update({'PYTHONPATH': USER_SITE})
+    c.OpenShiftSpawner.environment.update({'PIP_TARGET': USER_SITE})
+
   jupyterhub_admins: ""
   gpu_mode: ""
   singleuser_pvc_size: 2Gi
