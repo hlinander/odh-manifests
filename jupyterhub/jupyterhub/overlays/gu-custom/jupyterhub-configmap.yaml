@@ -15,16 +15,12 @@ data:
     c.CASAuthenticator.cas_login_url = '%s/login' % CAS_BASE_URL
     c.CASAuthenticator.cas_logout_url = '%s/logout' % CAS_BASE_URL
     c.CASAuthenticator.cas_service_validate_url = '%s/serviceValidate' % CAS_BASE_URL
-    c.CASAuthenticator.cas_service_url = 'https://%s/login' % host
+    c.CASAuthenticator.cas_service_url = 'https://jupyterhub.marine.gu.se/login'
     c.JupyterHub.authenticator_class = 'jhub_cas_authenticator.cas_auth.CASAuthenticator'
 
-    # Tillåt inga oregistrerade användare att logga in. Kräver att
-    # minst en administratör har angivits i fältet jupyterhub_admins i
-    # ConfigMap:en jupyterhub-cfg. En tom lista innebär att vem som
-    # helst får logga in.
+    # Tillåt inga oregistrerade användare att logga in.
 
-    if admin_users:
-      c.Authenticator.whitelist = set(admin_users.split(','))
+    c.Authenticator.whitelist = set(['xamatl', 'xkindj', 'xschec'])
 
     # Ta bort formuläret som visas när en notebook skapas
 
