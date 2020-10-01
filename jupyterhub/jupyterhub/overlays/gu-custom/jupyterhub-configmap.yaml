@@ -45,6 +45,8 @@ data:
     def _gu_custom_pre_spawn_hook(spawner):
       setup_environment(spawner)
       readOnly = not spawner.user.admin
+      # FIXA: Sök och lägg till om den inte finns.
+      spawner.volumes = [dict(name='data', persistentVolumeClaim=dict(claimName=c.KubeSpawner.pvc_name_template))]
       spawner.volumes.append({
         'name': 'shared',
         'persistentVolumeClaim': {
@@ -52,6 +54,7 @@ data:
           'readOnly': readOnly
         }
       })
+      spawner.volume_mounts = [dict(name='data', mountPath='/opt/app-root/src')]
       spawner.volume_mounts.append({
         'name': 'shared',
         'mountPath': '/opt/app-root/src/shared'
