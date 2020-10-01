@@ -7,3 +7,4 @@ resources:
 
 patchesStrategicMerge:
 - jupyterhub-configmap.yaml
+- jupyterhub-singleuser-profiles-configmap.yaml
