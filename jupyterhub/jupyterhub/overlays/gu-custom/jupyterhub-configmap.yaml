@@ -39,11 +39,14 @@ data:
 
     c.KubeSpawner.default_url = '/lab'
 
-    # Montera delad volym skrivskyddad för vanliga användare, och
-    # skrivbar för administratörer
+    # Pre-spawn hook
 
     def _gu_custom_pre_spawn_hook(spawner):
       setup_environment(spawner)
+
+      # Montera delad volym skrivskyddad för vanliga användare, och
+      # skrivbar för administratörer
+
       readOnly = not spawner.user.admin
       # FIXA: Sök och lägg till om den inte finns.
       spawner.volumes = [dict(name='data', persistentVolumeClaim=dict(claimName=c.KubeSpawner.pvc_name_template))]
@@ -59,6 +62,20 @@ data:
         'name': 'shared',
         'mountPath': '/opt/app-root/src/shared'
       })
+
+      # Tillåt anpassning av resursanvändning via användarprofiler
+
+      profile = spawner.single_user_profiles.get_user_profile_cm(spawner.user.name)
+      last_selected_size = profile.get('last_selected_size', False)
+      if not last_selected_size:
+        last_selected_size = "Small"
+        spawner.single_user_profiles.update_user_profile_cm(
+          spawner.user.name,
+          profile,
+          'last_selected_size',
+          last_selected_size
+        )
+      spawner.deployment_size = last_selected_size
 
     c.OpenShiftSpawner.pre_spawn_hook = _gu_custom_pre_spawn_hook
 

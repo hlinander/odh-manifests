@@ -11,8 +11,11 @@ data:
             value: $(s3_endpoint_url)
         resources:
           limits:
-            memory: 2Gi
+            memory: 1Gi
             cpu: 1
+          requests:
+            memory: 100Mi
+            cpu: 0
 
       - name: Spark Notebook
         images:
@@ -51,29 +54,3 @@ data:
               spark_image: 'quay.io/radanalyticsio/openshift-spark-py36:2.4.5-2'
             return:
               SPARK_CLUSTER: 'metadata.name'
-
-      sizes:
-      - name: Small
-        resources:
-          requests:
-            memory: 1Gi
-            cpu: 1
-          limits:
-            memory: 2Gi
-            cpu: 2
-      - name: Medium
-        resources:
-          requests:
-            memory: 2Gi
-            cpu: 2
-          limits:
-            memory: 4Gi
-            cpu: 4
-      - name: Large
-        resources:
-          requests:
-            memory: 4Gi
-            cpu: 4
-          limits:
-            memory: 8Gi
-            cpu: 8
