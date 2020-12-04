@@ -18,9 +18,9 @@ data:
     c.CASAuthenticator.cas_service_url = 'https://jupyterhub.marine.gu.se/login'
     c.JupyterHub.authenticator_class = 'jhub_cas_authenticator.cas_auth.CASAuthenticator'
 
-    # Tillåt inga oregistrerade användare att logga in.
+    # Tillåt alla att logga in.
 
-    c.Authenticator.whitelist = set(['xamatl', 'xkindj', 'xschec'])
+    c.Authenticator.whitelist = set()
 
     # Ta bort formuläret som visas när en notebook skapas
 
