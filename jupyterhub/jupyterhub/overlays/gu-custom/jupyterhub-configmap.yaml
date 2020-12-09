@@ -29,7 +29,7 @@ data:
 
     # Hårdkoda image
 
-    c.KubeSpawner.image_spec = 's2i-minimal-notebook:v0.0.4'
+    c.KubeSpawner.image_spec = 's2i-marine-jupyterhub:latest'
 
     # Öppna Jupyter Lab isf filträdet
 
