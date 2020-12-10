@@ -77,7 +77,7 @@ data:
 
     # Installera Python-moduler på persistent lagring
 
-    USER_SITE = '/opt/app-root/src/.local/lib/python3.6/site-packages'
+    USER_SITE = '/opt/app-root/src/.local/lib/python3.8/site-packages'
     c.OpenShiftSpawner.environment.update({'PYTHONPATH': USER_SITE})
     c.OpenShiftSpawner.environment.update({'PIP_TARGET': USER_SITE})
 
