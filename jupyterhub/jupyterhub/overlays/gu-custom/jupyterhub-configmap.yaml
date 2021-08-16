@@ -23,6 +23,7 @@ data:
     # ConfigMap:en jupyterhub-cfg. En tom lista innebär att vem som
     # helst får logga in.
 
+    admin_users = os.environ.get('JUPYTERHUB_ADMIN_USERS')
     if admin_users:
       c.Authenticator.whitelist = set(admin_users.split(','))
 
