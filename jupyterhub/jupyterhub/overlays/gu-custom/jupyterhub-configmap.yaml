@@ -86,6 +86,6 @@ data:
     c.OpenShiftSpawner.environment.update({'PYTHONPATH': USER_SITE})
     c.OpenShiftSpawner.environment.update({'PIP_TARGET': USER_SITE})
 
-  jupyterhub_admins: ""
+  jupyterhub_admins: "c-xkindj,a-xschec,xpaanf"
   gpu_mode: ""
   singleuser_pvc_size: 2Gi
