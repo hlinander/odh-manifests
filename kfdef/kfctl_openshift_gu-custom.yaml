@@ -30,5 +30,5 @@ spec:
   - name: kf-manifests
     uri: https://github.com/opendatahub-io/manifests/tarball/v1.0-branch-openshift
   - name: manifests
-    uri: https://github.com/cajosc/odh-manifests/tarball/gu-handels-fek
+    uri: https://github.com/hlinander/odh-manifests/tarball/gu-fysik-lfy032
   version: v0.8.0
