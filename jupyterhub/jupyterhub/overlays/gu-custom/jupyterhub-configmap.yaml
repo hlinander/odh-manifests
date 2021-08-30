@@ -35,7 +35,9 @@ data:
     # Hårdkoda image
 
     #c.KubeSpawner.image_spec = 's2i-minimal-notebook:v0.0.4'
-    c.KubeSpawner.image_spec = 's2i-pytorch-notebook:latest'
+    #c.KubeSpawner.image_spec = 's2i-pytorch-notebook:latest'
+    c.KubeSpawner.image_spec = 's2i-lfy032-jupyterhub:latest'
+
 
     # Öppna Jupyter Lab isf filträdet
 
