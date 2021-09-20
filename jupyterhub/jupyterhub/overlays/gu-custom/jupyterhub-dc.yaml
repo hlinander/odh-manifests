@@ -58,7 +58,7 @@ spec:
             configMapKeyRef:
               name: jupyterhub-cfg
               key: singleuser_pvc_size
-        image: quay.io/odh-jupyterhub/jupyterhub-img:v0.3.4
+        image: quay.io/odh-jupyterhub/jupyterhub-img:3.0.7-b7db22b
         name: jupyterhub
         ports:
         - containerPort: 8080
@@ -80,7 +80,7 @@ spec:
               key: POSTGRESQL_PASSWORD
         - name: JUPYTERHUB_DATABASE_HOST
           value: jupyterhub-db
-        image: quay.io/odh-jupyterhub/jupyterhub-img:v0.3.4
+        image: quay.io/odh-jupyterhub/jupyterhub-img:3.0.7-b7db22b
         name: wait-for-database
         resources:
           limits:
